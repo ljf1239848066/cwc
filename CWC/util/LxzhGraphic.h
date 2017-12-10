@@ -16,7 +16,6 @@
 
 +(NSMutableArray*)getLineRectWithStart:(CGPoint)ptStart end:(CGPoint)ptEnd startRadiu:(CGFloat) sR endRadiu:(CGFloat) eR;
 +(NSMutableArray*)getLineRectWithCenter:(CGPoint)ptCenter angle:(CGFloat)angle startLen:(CGFloat) stLen endLen:(CGFloat) enLen startRadius:(CGFloat)sR endRadiu:(CGFloat) eR;
-//(CGPoint*)getLineRectWithStart:(CGPoint)ptStart end:(CGPoint)ptEnd startRadiu:(CGFloat) sR endRadiu:(CGFloat) eR;
 
 @end
 #endif /* LxzhGraphic_h */
