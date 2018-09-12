@@ -16,9 +16,11 @@
 @property (nonatomic,assign) NSInteger tHour;
 @property (nonatomic,assign) NSInteger tMinute;
 @property (nonatomic,assign) NSInteger tSecond;
+@property (nonatomic,assign) int hourStep;
 
 -(void)setTimeWithHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second;
 
+-(void)setHourStep:(int)step;
 
 @end
 

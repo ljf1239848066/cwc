@@ -25,6 +25,9 @@
 //    [clockView addSubview:imgView];
 //    [clockView sendSubviewToBack:imgView];
     // Do any additional setup after loading the view, typically from a nib.
+    [clockView setHourStep:0];
+    [clockViewLittle setHourStep:3];
+    
     NSTimer *timer;
     timer = [NSTimer scheduledTimerWithTimeInterval: 0.5
                                              target: self
@@ -49,6 +52,9 @@
     long second=[comps second];
     //NSLog(@"%ld:%ld:%ld",hour,minute,second);
 
+    
+//    [clockView setTimeWithHour:10 minute:10 second:30];
+//
     [clockView setTimeWithHour:hour minute:minute second:second];
     [clockView setNeedsDisplay];
     

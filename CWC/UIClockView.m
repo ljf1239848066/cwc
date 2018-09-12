@@ -13,10 +13,17 @@
 
 @synthesize tHour,tMinute,tSecond;
 
--(void)setTimeWithHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second{
+-(void) setTimeWithHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second{
     self.tHour=hour;
     self.tMinute=minute;
     self.tSecond=second;
+}
+
+-(void) setHourStep:(int)step{
+    if(step<=0||step>=12||12%step!=0){
+        NSLog(@"Invalid hour step!");
+    }
+    _hourStep=step;
 }
 
 -(void) drawLineWithContext:(CGContextRef)context
@@ -89,7 +96,7 @@
 
     CGContextRef ctx=UIGraphicsGetCurrentContext();
 //    UIImage *img=[UIImage imageNamed:@"time"];
-//    UIGraphicsPushContext(ctx);
+//    UIGraphicsPushContext(ctx);//防止图片上下颠倒
 //    [img drawInRect:rect];
 //    UIGraphicsPopContext();
 //    CGContextStrokePath(ctx);//渲染上下文
@@ -110,14 +117,16 @@
     
     CGFloat fontSize=radiu/6.5;
     CGSize maxSize=CGSizeMake(radiu/4, radiu/6.5);
-    int step=3;
-    color=[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.95];
-    for(int i=step;i<=12;i+=step){
-        double angle=(-90+i*30.0)/180*M_PI;
-        NSString *txt=[NSString stringWithFormat:@"%d",i];
-        CGSize size=[self labelAutoCalculateRectWith:txt FontSize:fontSize MaxSize:maxSize];
-        CGRect txtRect=CGRectMake(center.x+radiu*0.8*cos(angle)-size.width/2, center.y+radiu*0.8*sin(angle)-size.height/2, size.width, size.height);
-        [txt drawInRect:txtRect withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:fontSize],NSForegroundColorAttributeName:color}];
+    int step=_hourStep;
+    if(step>0){
+        color=[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.95];
+        for(int i=step;i<=12;i+=step){
+            double angle=(-90+i*30.0)/180*M_PI;
+            NSString *txt=[NSString stringWithFormat:@"%d",i];
+            CGSize size=[self labelAutoCalculateRectWith:txt FontSize:fontSize MaxSize:maxSize];
+            CGRect txtRect=CGRectMake(center.x+radiu*0.8*cos(angle)-size.width/2, center.y+radiu*0.8*sin(angle)-size.height/2, size.width, size.height);
+            [txt drawInRect:txtRect withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:fontSize],NSForegroundColorAttributeName:color}];
+        }
     }
     
     //时针
